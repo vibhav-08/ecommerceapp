@@ -3,7 +3,7 @@ const connection = require('../../mysqldb.js');
 
 router.post("/", async (req, res) => {
 
-    var joinSelect = `  SELECT customers.email as customer_email, cart.quantity as cart_quantity, cart.price as cart_price, sellers.shopname as seller_name, items.name as item_name, items.company as item_company, sellers.email as seller_email, items.itemno as itemno
+    var joinSelect = `  SELECT cart.id as cart_id, customers.email as customer_email, cart.quantity as cart_quantity, cart.price as cart_price, sellers.shopname as seller_name, items.name as item_name, items.company as item_company, sellers.email as seller_email, items.itemno as itemno
                         from sellers join inventory 
                         on sellers.email = inventory.seller_email
                         join items
@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
                         on cart.seller_email = sellers.email
                         join customers
                         on cart.customer_email = customers.email
-                        where customers.email = ?`
+                        where customers.email = ? and cart.itemno = inventory.itemno`
 
     // var selectItems = 'SELECT * FROM cart WHERE customer_email = ?'
 

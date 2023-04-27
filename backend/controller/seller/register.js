@@ -23,13 +23,13 @@ router.post("/", async (req, res) => {
             [req.body.email, req.body.name, req.body.shopname, req.body.gstinno]
         ];
 
-        connection.query(insertSeller, [seller], (err, results, fields) => {
-            if (err) {
-                return console.error('error1', err.message);
-            }
-            // get inserted rows
-            console.log('Row inserted:' + results.affectedRows);
-        });
+        // connection.query(insertSeller, [seller], (err, results, fields) => {
+        //     if (err) {
+        //         return console.error('error1', err.message);
+        //     }
+        //     // get inserted rows
+        //     console.log('Row inserted:' + results.affectedRows);
+        // });
 
         console.log(user);
         res.status(200).send(user);

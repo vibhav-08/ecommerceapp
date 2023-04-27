@@ -15,22 +15,22 @@ import {
     MDBDropdown,
     MDBDropdownToggle,
     MDBDropdownItem,
-    MDBDropdownMenu, MDBInputGroup
+    MDBDropdownMenu
 } from 'mdb-react-ui-kit';
 import axios from 'axios';
 
 function LoginButton(props) {
     return (
-        <MDBBtn type="button" style={{ margin: '0 1% 0 0' }} href="/customer/login" color='primary'>Login</MDBBtn>
+        <MDBBtn type="button" style={{ margin: '0 1% 0 0' }} href="/warehouse/login" color='primary'>Login</MDBBtn>
     );
 }
 
 function LogoutButton(props) {
 
     const handleLogout = () => {
-        axios.post('/customer/login/logout').then(() => {
-            window.localStorage.removeItem('username');
-            window.location.href = '/customer/home';
+        axios.post('/warehouse/login/logout').then(() => {
+            window.localStorage.removeItem('warehouse');
+            window.location.href = '/warehouse/home';
         }
         );
     }
@@ -52,7 +52,7 @@ export default function App() {
     const [username, setUsername] = useState('');
 
     useEffect(() => {
-        axios.get('/customer/login').then((res, err) => {
+        axios.get('/warehouse/login').then((res, err) => {
             fetchUserName(res, err);
         })
     }, []);
@@ -64,7 +64,7 @@ export default function App() {
         }
         else {
             setUsername(res.data.user);
-            window.localStorage.setItem('username', res.data.user);
+            window.localStorage.setItem('warehouse', res.data.user);
         }
         console.log(username);
     }
@@ -73,7 +73,7 @@ export default function App() {
         <div>
             <MDBNavbar expand='lg' light bgColor='light'>
                 <MDBContainer fluid>
-                    <MDBNavbarBrand href='/customer/home'>Platform</MDBNavbarBrand>
+                    <MDBNavbarBrand href='/warehouse/home'>Platform</MDBNavbarBrand>
                     <MDBNavbarToggler
                         type='button'
                         aria-expanded='false'
@@ -85,17 +85,14 @@ export default function App() {
                     <MDBCollapse navbar show={showNav}>
                         <MDBNavbarNav>
                             <MDBNavbarItem>
-                                <MDBNavbarLink active aria-current='page' href='/customer/home'>
+                                <MDBNavbarLink active aria-current='page' href='/warehouse/home'>
                                     Home
                                 </MDBNavbarLink>
                             </MDBNavbarItem>
                             <MDBNavbarItem>
-                                <MDBNavbarLink href='/customer/cart'>Cart</MDBNavbarLink>
+                                <MDBNavbarLink href='/warehouse/inventory'>Inventory</MDBNavbarLink>
                             </MDBNavbarItem>
-                            <MDBNavbarItem>
-                                <MDBNavbarLink href='/customer/orders'>Orders</MDBNavbarLink>
-                            </MDBNavbarItem>
-                            
+
                         </MDBNavbarNav>
                         <div>
                             {username === '' || username === null || username === undefined

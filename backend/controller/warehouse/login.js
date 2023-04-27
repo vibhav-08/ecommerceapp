@@ -40,6 +40,13 @@ router.get("/", (req, res) => {
     }
 });
 
+router.post("/logout", async(req, res) => {
+    console.log(req.session.id);
+    req.session.destroy(() => {
+        res.status(200).send({msg: 'Cookie Destroyed'});
+    })
+})
+
 router.post("/", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;

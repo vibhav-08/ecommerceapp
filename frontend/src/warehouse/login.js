@@ -18,16 +18,16 @@ const Login = () => {
             password: password,
         }
         e.preventDefault();
-        await axios.post("/seller/login", login_data).then((res) => {
+        await axios.post("/warehouse/login", login_data).then((res) => {
             console.log(res.data);
             if (res.data.msg) { console.log("You are not logged in"); }
-            else { console.log("Calling from login POST Aprroved"); console.log("Correct combination"); window.location.href='/seller/home'}
+            else { console.log("Calling from login POST Aprroved"); console.log("Correct combination"); window.location.href = '/warehouse/home'}
         });
     }
 
     return (
         <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
-            <h1 style={{marginBottom:"5%"}}>Seller Sign In : </h1>
+            <h1 style={{marginBottom:"5%"}}>Warehouse Sign In : </h1>
             <MDBInput wrapperClass='mb-4' placeholder='Enter your Email ID' id='form1' type='email' required onChange={(e) => { setEmail(e.target.value); }} />
             <MDBInput wrapperClass='mb-4' id='form2' placeholder='Enter your Password' type='password' required onChange={(e) => { setPassword(e.target.value); }} />
 
@@ -38,7 +38,7 @@ const Login = () => {
             <MDBBtn className="mb-4" onClick={handleSubmit}>Sign in</MDBBtn>
 
             <div className="text-center">
-                <p>Not a user? <a href="/seller/register">Register</a></p>
+                <p>Not a user? <a href="/customer/register">Register</a></p>
 
             </div>
 
